@@ -10,7 +10,12 @@
     integrity="sha512-TWkU+ODW0Yap0G4qKj8DcxMI3YRCu1Wv9ZmW5Rt3CbdZzqv7XcYPOiRXkuMBXqJAKtFRkMvXkUke7pYDh+Kx1w=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-  />  <meta name="description" content="Online tutoring for Mathematics, Maths Literacy, Physical Sciences and Natural Sciences. Small classes, expert teachers." />
+  />  
+  <link 
+  rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+  <meta name="description" content="Online tutoring for Mathematics, Maths Literacy, Physical Sciences and Natural Sciences. Small classes, expert teachers." />
   <style>
     /* ====== BASE RESET ====== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -282,6 +287,31 @@
     /* small micro animations */
     [data-animate="fade-up"] { opacity:0; transform:translateY(10px); transition: all 520ms cubic-bezier(.2,.9,.3,1) }
     [data-animate].show { opacity:1; transform:translateY(0) }
+
+   .whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 32px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  background-color: #1ebe5d;
+}
+
   </style>
 </head>
 <body>
@@ -299,7 +329,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#programs">Programs</a></li>
-        <li><a href="#fees">Fees & Register</a></li>
+        <li><a href="register.html">Fees & Register</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -307,7 +337,7 @@
         ☰
       </button>
 
-      <a class="cta-small" href="#fees">Register</a>
+      <a class="cta-small" href="register.html">Register</a>
     </nav>
   </header>
 
@@ -325,7 +355,7 @@
           <p>Specialised online tutoring in Mathematics, Maths Literacy, Physical Sciences, and Natural Sciences. Small classes, expert teachers — tailored for results.</p>
 
           <div class="hero-actions">
-            <a class="btn-primary" href="#fees" role="button">Register for 2026</a>
+            <a class="btn-primary" href="register.html" role="button">Register for 2026</a>
             <a class="btn-outline" href="#programs">View Programs</a>
           </div>
 
@@ -435,7 +465,7 @@
           <p>Fees are charged per subject monthly. Two lessons per subject per week. Annual registration fee <strong>R250</strong> is required to secure your seat.</p>
           <div style="margin-top:12px;">
             <div style="font-weight:800; margin-bottom:6px">Quick pricing</div>
-            <div style="font-size:14px; color:var(--muted)">Grade 8–9: R700 / sub • Grade 10–11: R750 / sub • Grade 12: R800 / sub</div>
+            <div style="font-size:14px; color:var(--muted)">Grade 8–9: R650 / sub • Grade 10–11: R700 / sub • Grade 12: R850 / sub</div>
           </div>
         </aside>
       </div>
@@ -455,7 +485,7 @@
         <div class="contact-card" data-animate="fade-up" style="display:flex;flex-direction:column; justify-content:center; gap:12px;">
           <p style="font-weight:800">Need more info?</p>
           <p style="color:var(--muted)">We offer a short trial session for first-time learners — contact us to schedule a trial and assessment.</p>
-          <a href="#fees" class="btn-primary" style="width:fit-content;">Start Registration</a>
+          <a href="register.html" class="btn-primary" style="width:fit-content;">Start Registration</a>
         </div>
       </div>
     </section>
@@ -472,7 +502,12 @@
       </div>
     </div>
   </footer>
-
+<a href="https://wa.me/27619463698" 
+   class="whatsapp-float" 
+   target="_blank" 
+   aria-label="Chat on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
   <script>
     /* ====== NAV MOBILE TOGGLE ====== */
     (function(){
