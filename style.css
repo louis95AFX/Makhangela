@@ -1,0 +1,310 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  scroll-behavior: smooth;
+}
+
+/* CONTAINER */
+.container {
+  width: 85%;
+  margin: auto;
+  padding: 60px 0;
+}
+
+/* HEADER */
+header {
+  background: #004d99;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.logo h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.logo .tagline {
+  font-size: 12px;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s, transform 0.2s;
+}
+
+nav ul li a:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
+
+/* Mobile Menu */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: #004d99;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  nav ul.active {
+    display: flex;
+    animation: slideDown 0.4s ease;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* HERO SECTION */
+.hero {
+  position: relative;
+  height: 90vh;
+  background: url('students-background.jpg') center/cover no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 40px;
+  animation: fadeInUp 1.2s ease;
+}
+
+.hero-content h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.hero-content h2 span {
+  color: #ffcc00;
+}
+
+.hero-content p {
+  font-size: 18px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #ffcc00;
+  color: #000;
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 25px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+  background: #ffd633;
+  transform: scale(1.05);
+}
+
+.deadline {
+  margin-top: 15px;
+  font-size: 15px;
+  background: #e74c3c;
+  padding: 8px 12px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PROGRAMS */
+#programs h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #004d99;
+  font-size: 28px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.subject-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.subject-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.subject-box h4 {
+  margin-bottom: 10px;
+  color: #004d99;
+}
+
+.subject-box.highlight {
+  background: linear-gradient(135deg, #004d99, #0073e6);
+  color: white;
+}
+
+/* FEES CALCULATOR */
+.fees-calculator {
+  background: #eaf4ff;
+  text-align: center;
+}
+
+.calculator-card {
+  background: #fff;
+  width: 90%;
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.calculator-card label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.calculator-card select,
+.calculator-card input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+#total-fee {
+  color: #e74c3c;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* CONTACT */
+.contact-section h3 {
+  text-align: center;
+  color: #004d99;
+  margin-bottom: 20px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  background: white;
+  padding: 25px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contact-card a {
+  color: #004d99;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+  background: #002b5c;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+ .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+    }

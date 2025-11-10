@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Makhangela Maths & Science School of Excellence</title>
+ <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-TWkU+ODW0Yap0G4qKj8DcxMI3YRCu1Wv9ZmW5Rt3CbdZzqv7XcYPOiRXkuMBXqJAKtFRkMvXkUke7pYDh+Kx1w=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />  <meta name="description" content="Online tutoring for Mathematics, Maths Literacy, Physical Sciences and Natural Sciences. Small classes, expert teachers." />
+  <style>
+    /* ====== BASE RESET ====== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: Inter, "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #153243;
+      background: linear-gradient(180deg, #f7fbfe 0%, #ffffff 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height: 1.45;
+      scroll-behavior: smooth;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ====== THEME COLORS ====== */
+    :root{
+      --navy: #0b2540;
+      --accent: #ffd166; /* warm yellow */
+      --accent-2: #00b4d8; /* turquoise highlight */
+      --muted: #6b7b88;
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 8px 24px rgba(11,37,64,0.08);
+      --radius: 12px;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      top: 0;
+      width: 100%;
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      transition: background-color 320ms ease, backdrop-filter 320ms ease, box-shadow 320ms;
+      background: linear-gradient(180deg, rgba(11,37,64,0.06), rgba(255,255,255,0));
+    }
+    header.scrolled {
+      background: var(--navy);
+      box-shadow: 0 6px 20px rgba(11,37,64,0.12);
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-badge {
+      width:48px; height:48px;
+      background: linear-gradient(135deg,var(--accent), #f7a500);
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; color:#082033;
+      box-shadow: 0 6px 18px rgba(13,31,47,0.12);
+    }
+    .brand h1 { font-size:16px; color: var(--navy); font-weight:700; letter-spacing:0.2px; }
+    .brand p { font-size:12px; color:var(--muted); margin-top:2px }
+
+    nav { display:flex; align-items:center; gap:18px; }
+    .nav-links {
+      display:flex; gap:18px; list-style:none;
+    }
+    .nav-links a {
+      padding:8px 12px; border-radius:8px; color: var(--navy); font-weight:600; font-size:13px;
+      transition: all 180ms ease;
+    }
+    header.scrolled .nav-links a { color: #fff; opacity:0.95 }
+    .nav-links a:hover { transform: translateY(-2px); color: var(--accent); }
+
+    /* mobile menu button */
+    .menu-btn {
+      display:none;
+      background:transparent; border:0; font-size:22px; cursor:pointer; color:var(--navy)
+    }
+    header.scrolled .menu-btn { color:#fff; }
+
+    /* CTA button in header */
+    .cta-small {
+      background: var(--accent);
+      color: #06202a;
+      padding:8px 14px;
+      border-radius:9px;
+      font-weight:700;
+      box-shadow: 0 8px 20px rgba(255,209,102,0.12);
+      transition: transform 150ms ease;
+    }
+    .cta-small:hover { transform: translateY(-3px); }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 84vh;
+      display:grid;
+      align-items:center;
+      padding:120px 18px 60px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* NEW VIDEO BACKGROUND STYLES */
+    .hero-video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the video covers the entire container */
+      transform: translate(-50%, -50%); /* Centers the video */
+      z-index: 1;
+      /* Dark overlay to ensure text is visible */
+      filter: brightness(0.5) grayscale(0.2);
+    }
+
+    .hero-inner {
+      position:relative; z-index:2;
+      width:min(1180px, 94%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:32px;
+      align-items:center;
+    }
+
+    .hero-copy {
+      color: #fff; /* Ensure text is readable against the background */
+      text-shadow: 0 8px 30px rgba(2,10,20,0.45);
+    }
+    .hero-copy h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.02;
+      margin-bottom:14px;
+      font-weight:800;
+    }
+    .hero-copy h2 .accent { color: var(--accent); padding:2px 6px; border-radius:6px; background: rgba(255,209,102,0.12); }
+    .hero-copy p {
+      font-size:16px; margin-bottom:18px; opacity:0.95;
+    }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .btn-primary {
+      background: linear-gradient(90deg,var(--accent), #ffb347);
+      padding:12px 18px; border-radius:12px; font-weight:700; box-shadow: var(--shadow);
+      color:#06202a; border:0; cursor:pointer;
+    }
+    .btn-outline {
+      background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.18); padding:11px 16px; border-radius:10px;
+    }
+    .hero-meta {
+      margin-top:14px; display:flex; gap:12px; color:#ffeed9;
+      font-weight:600; font-size:13px;
+    }
+
+    /* hero card on right */
+    .hero-card {
+      background: linear-gradient(180deg,#ffffffcc,#ffffffcc);
+      border-radius:14px;
+      padding:20px;
+      box-shadow: 0 18px 40px rgba(2,10,25,0.12);
+      backdrop-filter: blur(6px);
+      color: var(--navy);
+    }
+    .hero-card h3 { font-size:18px; margin-bottom:8px; }
+    .hero-card p { color:var(--muted); font-size:14px; margin-bottom:12px; }
+    .tag-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .pill { padding:8px 10px; background:#fff; border-radius:10px; box-shadow: 0 6px 14px rgba(11,37,64,0.06); font-weight:700; font-size:13px; }
+
+    /* ====== SECTION WRAPPER ====== */
+    main { margin-top:10px; }
+
+    section.container {
+      width:min(1100px, 94%); margin: 40px auto; padding: 26px 0;
+    }
+
+    /* ====== PROGRAMS ====== */
+    .programs h3 { color: var(--navy); text-align:center; margin-bottom:20px; font-size:22px; }
+    .cards {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:20px;
+      align-items:stretch;
+    }
+    .card {
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 10px 30px rgba(11,37,64,0.06);
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms;
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(11,37,64,0.12); }
+    .card .icon {
+      width:52px; height:52px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(0,180,216,0.12), rgba(255,209,102,0.06));
+      font-size:22px;
+      color: var(--navy);
+      box-shadow: inset 0 -6px 12px rgba(0,0,0,0.03);
+    }
+    .card h4 { color:var(--navy); font-size:16px; margin-top:6px; }
+    .card ul { list-style:none; color:var(--muted); padding-left:0; margin-top:8px; display:grid; gap:6px; }
+    .card ul li::before { content: "•"; color:var(--accent-2); display:inline-block; width:20px; }
+
+    .accent-card {
+      background: linear-gradient(135deg,#062a3a, #004d66);
+      color: #fff;
+    }
+    .accent-card .icon { background: rgba(255,255,255,0.06); color:#fff }
+
+    /* ====== FEE CALCULATOR ====== */
+    .calculator-wrap { display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:flex-start; margin-top:8px; }
+    .calc-card {
+      background:var(--card);
+      border-radius:14px;
+      padding:20px;
+      width:420px;
+      box-shadow: var(--shadow);
+    }
+    .calc-card label { display:block; font-weight:700; color:var(--muted); margin-bottom:6px; font-size:13px; }
+    .calc-card select, .calc-card input {
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid #e6eef4; margin-bottom:12px; font-size:15px;
+      outline:none;
+    }
+    .fee-display { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:8px; }
+    .fee-display .text { color:var(--muted); font-weight:600; }
+    .fee-display .amount { font-size:24px; color:#d6482b; font-weight:800; }
+
+    .discount-note { color:#0b7a64; font-weight:700; font-size:13px; min-height:20px; opacity:0; transform:translateY(6px); transition: all 320ms ease; }
+    .discount-note.active { opacity:1; transform:translateY(0); }
+
+    /* quick info column */
+    .info-card { width:320px; background:linear-gradient(180deg,#f8fcff,#ffffff); border-radius:14px; padding:18px; box-shadow:var(--shadow); }
+    .info-card h4 { color:var(--navy); margin-bottom:8px; }
+    .info-card p { color:var(--muted); font-size:14px; margin-bottom:12px; }
+
+    /* ====== CONTACT ====== */
+    .contact {
+      display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:stretch;
+    }
+    .contact .contact-card {
+      background:var(--card); border-radius:12px; padding:18px; width:420px; box-shadow:var(--shadow);
+    }
+    .contact .contact-card p { color:var(--muted); margin-bottom:8px; font-weight:600; }
+    .contact .contact-cta {
+      padding:10px 14px; background:var(--accent-2); color:#06202a; border-radius:10px; font-weight:800; display:inline-block;
+      margin-top:8px;
+    }
+
+    /* ====== FOOTER ====== */
+    footer { margin-top:34px; padding:26px 0; background:#06202a; color:#fff; text-align:center; border-top:4px solid #0b4060; font-size:14px; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 980px) {
+      .hero-inner { grid-template-columns: 1fr; text-align:left; }
+      .hero-card { order:2; margin-top:12px; }
+      .hero-copy { order:1; }
+      header { padding:12px 18px; }
+    }
+    @media (max-width:720px) {
+      .nav-links { display:none; position:absolute; right:12px; top:64px; background:var(--navy); border-radius:12px; padding:12px; width:200px; flex-direction:column; }
+      .nav-links.show { display:flex; }
+      .menu-btn { display:block; }
+      .nav-links a { color:#fff; padding:10px 8px; border-radius:8px; }
+      .brand p{ display:none; }
+      .info-card { width:100%; }
+      .calc-card { width:100%; }
+      .hero { padding-top:110px; }
+    }
+
+    /* small micro animations */
+    [data-animate="fade-up"] { opacity:0; transform:translateY(10px); transition: all 520ms cubic-bezier(.2,.9,.3,1) }
+    [data-animate].show { opacity:1; transform:translateY(0) }
+  </style>
+</head>
+<body>
+
+  <header id="site-header" aria-label="Main header">
+    <div class="brand" aria-hidden="false">
+      <div class="logo-badge">M</div>
+      <div>
+        <h1>MMSSE</h1>
+        <p>Maths & Science School of Excellence</p>
+      </div>
+    </div>
+
+    <nav role="navigation" aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#fees">Fees & Register</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+        ☰
+      </button>
+
+      <a class="cta-small" href="#fees">Register</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero" aria-labelledby="heroTitle">
+      <video autoplay muted loop playsinline class="hero-video-bg" aria-hidden="true">
+        <source src="item1.mp4" type="video/mp4">
+        <source src="background-video.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="hero-inner">
+        <div class="hero-copy" data-animate="fade-up">
+          <h2 id="heroTitle">Empower Your Child’s Future in <span class="accent">STEM</span></h2>
+          <p>Specialised online tutoring in Mathematics, Maths Literacy, Physical Sciences, and Natural Sciences. Small classes, expert teachers — tailored for results.</p>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="#fees" role="button">Register for 2026</a>
+            <a class="btn-outline" href="#programs">View Programs</a>
+          </div>
+
+          <div class="hero-meta" style="margin-top:18px;">
+            <div>Start date: <strong>1st December 2025 - 31 Dec 2025</strong></div>
+            <div style="opacity:.9">Reg fee: <strong>R250</strong></div>
+          </div>
+        </div>
+
+        <aside class="hero-card" data-animate="fade-up">
+          <h3>Why MMSSE?</h3>
+          <p>Focused learning with a maximum of 5 learners per class, two weekly lessons per subject, and certified tutors with strong exam results.</p>
+
+          <div class="tag-row">
+            <div class="pill">1:5 Teacher Ratio</div>
+            <div class="pill">2 lessons / week</div>
+            <div class="pill">Online & Recorded</div>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+            <div style="width:44px; height:44px; border-radius:10px; background:#fff; display:grid; place-items:center; font-weight:800; color:#06202a">Q</div>
+            <div>
+              <div style="font-weight:700">Mr Q Zulu</div>
+              <div style="font-size:13px; color:var(--muted)">Lead Coordinator</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="programs" class="container programs" aria-labelledby="programsTitle">
+      <h3 id="programsTitle">📚 Our Subjects & Approach</h3>
+
+      <div class="cards" >
+        <article class="card" data-animate="fade-up">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="icon">🔢</div>
+            <div>
+              <h4>Senior Phase (Grades 8–9)</h4>
+              <div style="font-size:13px; color:var(--muted)">Strong foundation in core numeracy and science.</div>
+            </div>
+          </div>
+          <ul>
+            <li>Mathematics</li>
+            <li>Natural Sciences</li>
+          </ul>
+        </article>
+
+        <article class="card" data-animate="fade-up">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="icon">📐</div>
+            <div>
+              <h4>FET Phase (Grades 10–12)</h4>
+              <div style="font-size:13px; color:var(--muted)">Exam-focused lessons, past paper practice & concept mastery.</div>
+            </div>
+          </div>
+          <ul>
+            <li>Mathematics</li>
+            <li>Maths Literacy</li>
+            <li>Physical Sciences</li>
+          </ul>
+        </article>
+
+        <article class="card accent-card" data-animate="fade-up">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="icon">⭐</div>
+            <div>
+              <h4>The MMSSE Edge</h4>
+              <div style="font-size:13px; color:rgba(255,255,255,0.9)">Personalized attention and consistent results.</div>
+            </div>
+          </div>
+          <ul style="color:rgba(255,255,255,0.95);">
+            <li><strong>Two lessons/week</strong> per subject</li>
+            <li><strong>Max 5 learners</strong> per lesson</li>
+            <li><strong>Certified expert</strong> teachers</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="fees" class="container" aria-labelledby="feesTitle">
+      <h3 id="feesTitle" style="text-align:center; color:var(--navy); margin-bottom:8px">💰 Monthly Tuition Fee Calculator</h3>
+      <p style="text-align:center; color:var(--muted); margin-bottom:18px">Estimate your monthly tuition based on grade and number of subjects. Discounts apply for multiple subjects.</p>
+
+      <div class="calculator-wrap">
+        <div class="calc-card" data-animate="fade-up">
+          <label for="grade">Select Grade</label>
+          <select id="grade" aria-label="Select grade">
+            <option value="8-9">Grade 8 - 9 (R700 / subject)</option>
+            <option value="10-11">Grade 10 - 11 (R750 / subject)</option>
+            <option value="12">Grade 12 (R800 / subject)</option>
+          </select>
+
+          <label for="subjects">Number of Subjects</label>
+          <input id="subjects" type="number" min="1" max="3" value="1" aria-label="Number of subjects">
+
+          <div class="fee-display" aria-live="polite">
+            <div class="text">Estimated monthly fee</div>
+            <div class="amount" id="total-fee" data-value="0">R 0.00</div>
+          </div>
+
+          <div class="discount-note" id="discount-note" role="status" aria-atomic="true" style="margin-top:10px; min-height:22px;"></div>
+        </div>
+
+        <aside class="info-card" data-animate="fade-up">
+          <h4>How fees work</h4>
+          <p>Fees are charged per subject monthly. Two lessons per subject per week. Annual registration fee <strong>R250</strong> is required to secure your seat.</p>
+          <div style="margin-top:12px;">
+            <div style="font-weight:800; margin-bottom:6px">Quick pricing</div>
+            <div style="font-size:14px; color:var(--muted)">Grade 8–9: R700 / sub • Grade 10–11: R750 / sub • Grade 12: R800 / sub</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact" class="container" aria-labelledby="contactTitle">
+      <h3 id="contactTitle" style="text-align:center; margin-bottom:10px; color:var(--navy)">📞 Contact & Registration</h3>
+
+      <div class="contact">
+        <div class="contact-card" data-animate="fade-up">
+          <p style="font-weight:800">Ready to register? Contact Mr Q Zulu</p>
+          <p><strong>Tel:</strong> <a href="tel:+27619463698">061 946 3698</a></p>
+          <p><strong>Email:</strong> <a href="mailto:zuluqhue68@gmail.com">zuluqhue68@gmail.com</a></p>
+          <a class="contact-cta" href="mailto:zuluqhue68@gmail.com?subject=Registration%20Inquiry">Email to Register</a>
+        </div>
+
+        <div class="contact-card" data-animate="fade-up" style="display:flex;flex-direction:column; justify-content:center; gap:12px;">
+          <p style="font-weight:800">Need more info?</p>
+          <p style="color:var(--muted)">We offer a short trial session for first-time learners — contact us to schedule a trial and assessment.</p>
+          <a href="#fees" class="btn-primary" style="width:fit-content;">Start Registration</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+<a href="https://wa.me/27619463698" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <footer>
+    <div style="max-width:1100px;margin:auto; padding:0 18px;">
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+        <div>&copy; 2025 Makhangela Maths & Science School of Excellence</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.85)">Empowering the next generation of thinkers.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ====== NAV MOBILE TOGGLE ====== */
+    (function(){
+      const menuBtn = document.getElementById('menuBtn');
+      const nav = document.getElementById('navLinks');
+      menuBtn.addEventListener('click', () => {
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('show');
+      });
+
+      // Close mobile nav on link click
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        if (nav.classList.contains('show')) {
+          nav.classList.remove('show');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+      }));
+    })();
+
+    /* ====== HEADER SCROLL EFFECT ====== */
+    (function(){
+      const header = document.getElementById('site-header');
+      const hero = document.querySelector('.hero');
+      const threshold = 60;
+      function onScroll(){
+        if (window.scrollY > threshold) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+    })();
+
+    /* ====== ANIMATE ON SCROLL (small) ====== */
+    (function(){
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('show');
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+    })();
+
+    /* ====== FEE CALCULATOR (with animated number & discount) ====== */
+    (function(){
+      const gradeSelect = document.getElementById('grade');
+      const subjectsInput = document.getElementById('subjects');
+      const totalFeeElement = document.getElementById('total-fee');
+      const discountNoteElement = document.getElementById('discount-note');
+
+      const fees = { '8-9': 700, '10-11': 750, '12': 800 };
+      const discountRate = 0.10;
+
+      function formatCurrency(amount) {
+        // R 1,234.56
+        return 'R ' + Number(amount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function calculateFee() {
+        const selected = gradeSelect.value;
+        let subjects = parseInt(subjectsInput.value, 10) || 1;
+        subjects = Math.max(1, Math.min(3, subjects));
+        subjectsInput.value = subjects;
+
+        const base = fees[selected];
+        const rawTotal = base * subjects;
+        let final = rawTotal;
+
+        if (subjects >= 2) {
+          const discount = rawTotal * discountRate;
+          final = rawTotal - discount;
+          discountNoteElement.textContent = "🎉 10% Multi-Subject Discount applied — you saved " + formatCurrency(discount);
+          discountNoteElement.classList.add('active');
+          // subtle pulse
+          discountNoteElement.animate([{ transform:'scale(1)' }, { transform:'scale(1.03)' }, { transform:'scale(1)' }], { duration:500 });
+        } else {
+          discountNoteElement.textContent = "";
+          discountNoteElement.classList.remove('active');
+        }
+
+        animateNumber(parseFloat(totalFeeElement.dataset.value || 0), final, 420, (v) => {
+          totalFeeElement.textContent = formatCurrency(v);
+          totalFeeElement.dataset.value = v;
+        });
+      }
+
+      function animateNumber(from, to, duration, onUpdate) {
+        const start = performance.now();
+        function frame(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; // easeInOutQuad-ish
+          const val = from + (to - from) * eased;
+          onUpdate(val);
+          if (t < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      gradeSelect.addEventListener('change', calculateFee);
+      subjectsInput.addEventListener('input', calculateFee);
+
+      // init
+      calculateFee();
+    })();
+  </script>
+
+</body>
+</html>
