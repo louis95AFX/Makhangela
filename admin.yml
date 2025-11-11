@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # Change this to your main GitHub/Git branch name (e.g., 'master' or 'main')
+
+publish_mode: editorial_workflow # Use if you want draft/review stages (optional)
+media_folder: "assets/uploads" # Where images/videos uploaded via CMS will be stored
+public_folder: "/assets/uploads" # Path to the images when they are displayed
+
+collections:
+  - name: "updates"
+    label: "School Updates"
+    folder: "_data" # A simple folder to store your JSON file
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # How the filename is created
+    fields:
+      - {label: "Update Title", name: "title", widget: "string", required: true}
+      - {label: "Date Posted", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Category", name: "category", widget: "select", options: ["Important Announcement", "Staff News", "Program Details", "Media"]}
+      - {label: "Icon Class", name: "icon", widget: "select", options: ["fa-bullhorn", "fa-users", "fa-graduation-cap", "fa-video"], hint: "Select a Font Awesome icon."}
+      - {label: "Content (Rich Text)", name: "content_html", widget: "markdown"}
