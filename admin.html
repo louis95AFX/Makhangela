@@ -1,11 +1,305 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MMSSE Admin | Post New Update</title>
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-TWkU+ODWjYap0G4qKj8DcxMI3YRCu1Wv9ZmW5Rt3CbdZzqv7XcYPOiRXkuMBXqJAKtFRkMvXkUke7pYDh+Kx1w=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    /> 
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: #153243;
+            background: #f7fbfe;
+            line-height: 1.45;
+        }
+        :root{
+            --navy: #0b2540;
+            --accent: #ffd166;
+            --accent-2: #00b4d8;
+            --muted: #6b7b88;
+            --card: #ffffff;
+            --shadow: 0 8px 24px rgba(11,37,64,0.08);
+            --radius: 12px;
+        }
+        .container {
+            width: min(700px, 94%);
+            margin: 60px auto;
+            padding: 30px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        h2 {
+            font-size: 28px;
+            color: var(--navy);
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .form-group { margin-bottom: 20px; }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--navy);
+        }
+        input:not([type="submit"]), textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+            background: #fcfcfc;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent-2);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .media-instructions {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 5px;
+            padding: 10px;
+            background: #f0f7ff;
+            border-radius: 6px;
+        }
+        .submit-btn {
+            background: var(--navy);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            width: 100%;
+        }
+        .submit-btn:hover { background: #1e3f65; }
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            display: none;
+        }
+        .success {
+            background-color: #e6ffed;
+            color: #106f20;
+            border: 1px solid #106f20;
+        }
+        .error {
+            background-color: #ffe6e6;
+            color: #cc4444;
+            border: 1px solid #cc4444;
+        }
+        .processing {
+            background-color: #fff8e6;
+            color: #f7a500;
+            border: 1px solid #f7a500;
+        }
+        .warning {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fbe6ff;
+            color: #8c00b4;
+            border: 1px dashed #c100ff;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .warning strong { color: #5d0075; }
+        #previewContainer img, #previewContainer video {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Post New School Update ✍️</h2>
+        
+        <div class="warning">
+            <strong>Security Warning:</strong> This page allows data submission to your public API. 
+            For production use, secure this page using a password or host it in a restricted area.
+        </div>
+
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="title">Update Title *</label>
+                <input type="text" id="title" name="Title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date *</label>
+                <input type="date" id="date" name="Date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="Category" required>
+                    <option value="">Select a Category</option>
+                    <option value="Important Announcement">Important Announcement</option>
+                    <option value="Registration Update">Registration Update</option>
+                    <option value="Program Details">Program Details</option>
+                    <option value="Staff News">Staff News</option>
+                    <option value="Video/Photo Post">Video/Photo Post</option>
+                    <option value="General News">General News</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="content">Full Description *</label>
+                <textarea id="content" name="Content" required placeholder="Type your message here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="mediaUrl">Optional Media URL</label>
+                <input type="url" id="mediaUrl" name="MediaURL" placeholder="Paste a public link (optional)">
+                <div class="media-instructions">
+                    OR upload a file from your device below 👇
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="mediaFile">Upload Image/Video</label>
+                <input type="file" id="mediaFile" name="MediaFile" accept="image/*,video/*">
+                <div id="previewContainer"></div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> Submit Update
+            </button>
+            
+            <div id="status-message"></div>
+        </form>
+    </div>
+
+    <script>
+    // === CONFIGURATION ===
+    const SHEET_API_URL = 'YOUR_SHEET_API_URL_HERE';
+    const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dvakgepbp/upload";
+    const CLOUDINARY_UPLOAD_PRESET = "louis95"; // your preset name
+
+
+    const form = document.getElementById('updateForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('status-message');
+    const mediaFileInput = document.getElementById('mediaFile');
+    const previewContainer = document.getElementById('previewContainer');
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+
+    function setStatus(message, type) {
+        statusMessage.textContent = message;
+        statusMessage.className = '';
+        statusMessage.classList.add(type);
+        statusMessage.style.display = 'block';
+    }
+
+    // === PREVIEW SELECTED FILE ===
+    mediaFileInput.addEventListener('change', () => {
+        previewContainer.innerHTML = '';
+        const file = mediaFileInput.files[0];
+        if (!file) return;
+
+        const fileURL = URL.createObjectURL(file);
+        let preview;
+
+        if (file.type.startsWith('image/')) {
+            preview = document.createElement('img');
+            preview.src = fileURL;
+        } else if (file.type.startsWith('video/')) {
+            preview = document.createElement('video');
+            preview.src = fileURL;
+            preview.controls = true;
+        }
+
+        previewContainer.appendChild(preview);
+    });
+
+    // === FORM SUBMISSION ===
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        setStatus('Processing...', 'processing');
+
+        const formData = new FormData(form);
+        const file = mediaFileInput.files[0];
+        let mediaUrl = formData.get('MediaURL') || '';
+
+        try {
+            // If a local file is chosen, upload it to Cloudinary
+            if (file) {
+                setStatus('Uploading media...', 'processing');
+                const uploadData = new FormData();
+                uploadData.append('file', file);
+                uploadData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+                const uploadResponse = await fetch(CLOUDINARY_UPLOAD_URL, {
+                    method: 'POST',
+                    body: uploadData
+                });
+
+                const uploadResult = await uploadResponse.json();
+                if (uploadResult.secure_url) {
+                    mediaUrl = uploadResult.secure_url;
+                } else {
+                    throw new Error('Upload failed.');
+                }
+            }
+
+            // Prepare data for Google Sheet
+            const data = {
+                Title: formData.get('Title').trim(),
+                Date: document.getElementById('date').value,
+                Category: formData.get('Category'),
+                Content: formData.get('Content'),
+                MediaURL: mediaUrl
+            };
+
+            const response = await fetch(SHEET_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                setStatus('✅ Success! Update submitted.', 'success');
+                form.reset();
+                document.getElementById('date').value = today;
+                previewContainer.innerHTML = '';
+            } else {
+                const errText = await response.text();
+                console.error(errText);
+                setStatus('❌ Error submitting update.', 'error');
+            }
+        } catch (err) {
+            console.error(err);
+            setStatus('❌ Network or upload error.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+    </script>
 </body>
 </html>

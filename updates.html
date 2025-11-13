@@ -395,59 +395,7 @@
 
         document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
     })();
-
-    /* ====== DYNAMIC CONTENT LOADER ====== */
-    const feedContainer = document.querySelector('.update-feed');
-
-    function createUpdateElement(update) {
-      // Handles the data coming from the CMS (which saves the content in the 'body' field)
-      const contentKey = update.content_html || update.body; 
-      
-      const article = document.createElement('article');
-      article.className = 'update-item';
-      article.setAttribute('data-animate', 'fade-up');
-
-      article.innerHTML = `
-        <h3>${update.title}</h3>
-        <div class="update-meta">
-            <span><i class="fas fa-calendar-alt"></i> ${update.date}</span>
-            <span><i class="fas ${update.icon}"></i> ${update.category}</span>
-        </div>
-        <div class="update-content">
-            ${contentKey}
-        </div>
-      `;
-      
-      // Re-attach AOS observer for newly created elements
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-              if (e.isIntersecting) e.target.classList.add('show');
-          });
-      }, { threshold: 0.12 });
-      observer.observe(article);
-
-      return article;
-    }
-
-    // Fetch the data from the JSON file the CMS creates
-    fetch('/_data/updates.json')
-      .then(response => {
-        if (!response.ok) throw new Error('Could not fetch updates.');
-        return response.json();
-      })
-      .then(data => {
-        // We assume the data is an array of updates
-        if (Array.isArray(data) && data.length > 0) {
-          data.forEach(update => {
-            feedContainer.appendChild(createUpdateElement(update));
-          });
-        } else {
-          feedContainer.innerHTML = `<div class="empty-state" data-animate="fade-up"><i class="far fa-clipboard"></i><h3>No Recent Updates</h3><p>Use the admin panel to post your first news item.</p></div>`;
-        }
-      })
-      .catch(error => {
-        console.error('Error loading updates:', error);
-      });
+    
   </script>
 
 </body>
