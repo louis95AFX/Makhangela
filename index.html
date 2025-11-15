@@ -312,6 +312,93 @@
   background-color: #1ebe5d;
 }
 
+/* === POPUP BACKDROP === */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* === POPUP BOX === */
+.popup-box {
+  background: #ffffff;
+  padding: 30px;
+  width: 320px;
+  border-radius: 15px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.2);
+  transform: translateY(-40px);
+  opacity: 0;
+  animation: slideIn 0.35s ease-out forwards;
+}
+
+/* Slide animation */
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+/* Password wrapper */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Buttons */
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn-login {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  padding: 10px 20px;
+  background: #999;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
@@ -325,22 +412,40 @@
       </div>
     </div>
 
-    <nav role="navigation" aria-label="Main navigation">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="updates.html">Updates/News</a></li>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="register.html">Fees & Register</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
+   <nav role="navigation" aria-label="Main navigation">
+  <ul class="nav-links" id="navLinks">
+    <li><a href="updates.html">Updates/News</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="register.html">Fees & Register</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" id="adminBtn">Admin</a></li>
+  </ul>
 
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
-        ☰
-      </button>
+  <button class="menu-btn" id="menuBtn">☰</button>
+  <a class="cta-small" href="register.html">Register</a>
+</nav>
 
-      <a class="cta-small" href="register.html">Register</a>
-    </nav>
+<!-- MODERN LOGIN POPUP -->
+<div id="loginPopup" class="popup-overlay">
+  <div class="popup-box">
+    <h2>Admin Login</h2>
+
+    <input type="text" id="username" placeholder="Username" class="input-field">
+
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Password" class="input-field">
+      <span id="togglePassword" class="toggle-eye">👁️</span>
+    </div>
+
+    <div class="popup-actions">
+      <button class="btn-login" id="loginBtn">Login</button>
+      <button class="btn-cancel" id="cancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
   </header>
 
   <main>
@@ -511,24 +616,48 @@
   <i class="fa-brands fa-whatsapp"></i>
 </a>
   <script>
-    /* ====== NAV MOBILE TOGGLE ====== */
-    (function(){
-      const menuBtn = document.getElementById('menuBtn');
-      const nav = document.getElementById('navLinks');
-      menuBtn.addEventListener('click', () => {
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('show');
-      });
 
-      // Close mobile nav on link click
-      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        if (nav.classList.contains('show')) {
-          nav.classList.remove('show');
-          menuBtn.setAttribute('aria-expanded', 'false');
-        }
-      }));
-    })();
+     const adminBtn = document.getElementById("adminBtn");
+  const popup = document.getElementById("loginPopup");
+  const loginBtn = document.getElementById("loginBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const togglePassword = document.getElementById("togglePassword");
+
+  // Hard-coded login credentials
+  const correctUsername = "admin";
+  const correctPassword = "12345";
+
+  // Show popup
+  adminBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  // Password toggle visibility
+  togglePassword.addEventListener("click", () => {
+    const passwordField = document.getElementById("password");
+    const type = passwordField.type === "password" ? "text" : "password";
+    passwordField.type = type;
+
+    // Change icon
+    togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+  });
+
+  // Login button
+  loginBtn.addEventListener("click", () => {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (username === correctUsername && password === correctPassword) {
+      window.location.href = "admin.html";
+    } else {
+      alert("Incorrect username or password");
+    }
+  });
+
+  // Cancel popup
+  cancelBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
 
     /* ====== HEADER SCROLL EFFECT ====== */
     (function(){
